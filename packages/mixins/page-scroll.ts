@@ -23,17 +23,18 @@ export const pageScrollMixin = (scroller: Scroller) =>
   Behavior({
     attached() {
       const page = getCurrentPage<{ vanPageScroller: Scroller[] }>();
+      if (isDef(page)) {
+        if (Array.isArray(page.vanPageScroller)) {
+          page.vanPageScroller.push(scroller.bind(this));
+        } else {
+          page.vanPageScroller =
+            typeof page.onPageScroll === 'function'
+              ? [page.onPageScroll.bind(page), scroller.bind(this)]
+              : [scroller.bind(this)];
+        }
 
-      if (Array.isArray(page.vanPageScroller)) {
-        page.vanPageScroller.push(scroller.bind(this));
-      } else {
-        page.vanPageScroller =
-          typeof page.onPageScroll === 'function'
-            ? [page.onPageScroll.bind(page), scroller.bind(this)]
-            : [scroller.bind(this)];
+        page.onPageScroll = onPageScroll;
       }
-
-      page.onPageScroll = onPageScroll;
     },
 
     detached() {

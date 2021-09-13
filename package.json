@@ -1,7 +1,7 @@
 {
-  "name": "@vant/weapp",
-  "version": "1.8.4",
-  "author": "youzan",
+  "name": "@polpo-studio/weapp",
+  "version": "1.8.5",
+  "author": "polpo-studio",
   "license": "MIT",
   "miniprogram": "lib",
   "description": "轻量、可靠的小程序 UI 组件库",
